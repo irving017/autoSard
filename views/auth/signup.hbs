@@ -1,0 +1,54 @@
+<h2>Sign Up</h2>
+<form action="/signup" method="POST">	
+  <p>
+    <label for='email'>Email</label>
+    <input id='email' name='email' type='email' placeholder='example@gmail.com'>
+  </p>
+  <p>
+    <label for='username'>Username</label>
+    <input id='username' name='username' type='username' placeholder='Jon Snow'>
+  </p>
+	<p>
+    <label for='password'>Password</label>
+    <input id='password' name='password' type='password' placeholder='Winter is Coming'>
+  </p>
+    <label for='company'>Company</label>
+    <select name="company_id" id="company">
+      {{#each companies}}
+      <option value="companyName">{{this.companyName}}</option>
+      {{/each}}
+    </select>
+	<input type='submit' value='SignUp'>
+</form>
+
+
+<div class="login-content" > 
+
+  <h2>Login</h2>
+
+<form action="/signup" method="POST">
+
+  <div class="form-group">
+    <label class="sr-only" for='email'>Email</label>
+    <input class="form-control" id="email"  name='email' type="email"   placeholder="example@gmail.com">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for='username'>Username</label>
+    <input class="form-control" id="username"  name='username' type="username"   placeholder="John Snow">
+  </div>
+  <div class="form-group mx-sm-3">
+    <label for="password" class="sr-only">Password</label>
+    <input class="form-control" id="password" name="password"  type="password"   placeholder="Winter is Coming">
+  </div>
+  <label for='company'>Company</label>
+    <select name="company_id" id="company">
+      {{#each companies}}
+      <option value="companyName">{{this.companyName}}</option>
+      {{/each}}
+    </select>
+  <button type="submit" value="SignUp" class="btn btn-primary"></button>
+
+</form>
+
+
+</div>

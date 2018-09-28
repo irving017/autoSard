@@ -1,0 +1,137 @@
+<style>
+
+.mapa{
+  margin: 30px 0;
+  border-radius: 15px;
+  width: 70%;
+  height: 500px;
+}
+
+.fotoPerfil img{
+  margin: 50px 0;
+  border: solid 1px black;
+  width: 200px;
+  height: 200px;
+  border-radius: 150px;
+  
+}
+
+.papa{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+#section2{
+  width: 100%;
+  padding: 30px;
+  background-color: #CCD7E4;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart{
+  width: 70vw;
+  margin-left: 300px;
+
+}
+
+.container{
+  margin: 20px 0 ;
+}
+
+#section1{
+  display: flex;
+  flex-direction: row;
+  width: 70vw;
+  margin: 0 25vw;
+
+}
+
+.boton{
+  width: 200px;
+  margin: 20px 0;
+
+}
+
+</style>
+
+<section id="section1" > 
+  <div class="fotoPerfil" > <img src="{{ruta.user.photoURL}}" alt="Imagen" id="img-perfil"> </div> 
+  <div class="papa" >
+    
+  <h2>Detalles del viaje de {{ruta.user.username}}!</h2>
+  <h3></h3>
+  <p><a href="/profile/company/{{ruta.company}}" ><button class="btn btn-primary  boton">Home empresa</button></a>  
+    
+  </div>
+
+</section>
+<div id="section2" >
+  <div class="cart" >
+    <h2>Perfil y gustos del conductor!</h2></p>
+  <p>Nombre:{{ruta.user.completeName}}</p>
+  <p>Edad: {{ruta.user.age}} Años</p>
+  <p>Gusto musical: {{ruta.user.preferences.music}}</p>
+  <p>¿Tienes permitido fumar?: {{ruta.user.preferences.smoke}}</p>
+  <p>Descripción: {{ruta.user.preferences.descripcion}}</p>
+
+  </div>
+</div>
+
+  <center>
+      
+  <div class="container">
+    
+      <h3>Información del viaje!</h3>
+    <div class="mapa" id="map"></div>
+    {{#if user2}}
+    <form action='/profile/route/detail/{{ruta._id}}' method="POST">
+    <input type="submit" value="Unete al viaje  "  class="btn btn-primary">
+    </form>
+    {{/if}}
+  
+    </div>
+  </center>
+
+
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIstIL_VA1Z_tPaYLKg2CvMG1sz6V0ywY"></script>
+<script>
+  const lngs={{ruta.start.coordinates.[0]}}
+  const lats={{ruta.start.coordinates.[1]}}
+  const lngd={{ruta.destiny.coordinates.[0]}}
+  const latd={{ruta.destiny.coordinates.[1]}}
+
+  function initMap() {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 17,
+      center: {lat: 19.39776549999999, lng: -99.1713954}
+    });
+    directionsDisplay.setMap(map);
+    calculateAndDisplayRoute(directionsService,directionsDisplay)
+  }
+  function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+      origin:{lat:lats,lng:lngs},
+      destination:{lat:latd,lng:lngd},
+      travelMode: 'DRIVING'
+    }, 
+    function(response, status) {
+      if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+      } else {
+      window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
+  initMap()  
+</script>

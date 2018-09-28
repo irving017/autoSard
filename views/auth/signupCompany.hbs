@@ -1,0 +1,42 @@
+<h2>Sign Up Company</h2>
+<form action="/signup/company" method="POST">	
+  <p>
+    <label for='companyName'>Company name</label>
+    <input id='companyName' name='companyName' type='text' placeholder='Ironhack'>
+  </p>
+  <p>
+    <label for='address'>Address</label>
+    <input id='address' name='location[address]' type='text' placeholder='Insurgentes #601,Naṕoles'>
+  </p>
+  <p>
+    <label for='email'>Email de contacto</label>
+    <input id='email' name='contact' type='email' placeholder='ironhack@ironhack.com'>
+  </p>
+  <p>
+    <label for='latitud'>Latitud</label>
+    <input type="text" name="location[coordinates][1]" id="latitud">
+  </p>
+    <p>
+    <label for='longitud'>Longitud</label>
+    <input type="text" name="location[coordinates][0]" id="longitud">
+  </p>
+	<input type='submit' value='SignUp'>
+</form>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8o46KiOg4PdiJ8WCRXC9KyFfE4d-g0Qw&libraries=places"></script>
+
+<script>
+  const address = document.getElementById('address')
+  const lat = document.getElementById('latitud')
+  const lng = document.getElementById('longitud')
+  function autoComplete(addressInput,latInput,lngInput){
+    const dropdown = new google.maps.places.Autocomplete(addressInput)
+    dropdown.addListener('place_changed',()=>{
+      const place =dropdown.getPlace()
+      console.log(place)
+      lat.value= place.geometry.location.lat()
+      lng.value= place.geometry.location.lng()
+    })
+  }
+  autoComplete(address,lat,lng)
+</script>

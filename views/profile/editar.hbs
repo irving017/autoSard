@@ -1,0 +1,76 @@
+
+<style>
+
+
+.contenedor input{
+
+  border-radius: 5px;
+
+}
+.contenedor textarea{
+
+  border-radius: 5px;
+
+}
+
+#section2{
+  width: 100%;
+  padding: 30px;
+  background-color: #CCD7E4;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+</style>
+
+<h2>Personaliza tu perfil!!!</h2>
+
+
+<form id="section2" action="/profile/user/editar/{{_id}}" method="POST" enctype="multipart/form-data">
+  <div class="contenedor">
+  <p>
+    Nombre de Usuario:
+    <input type="text" name="username" value="{{username}}">
+  </p>
+  <p>
+    <input type="file" name="image">
+  </p>
+  <p>
+    Nombre Completo:
+    <input type="text" name="completeName" value="{{completeName}}">
+  </p>
+  <p>
+    Edad:
+    <input type="number" name="age" value="{{age}}">
+  </p>
+  <p>
+    ¿Tienes auto?:
+    <select name="car" id="auto">
+      <option value="Si">Si</option>
+      <option value="No">No</option>
+    </select>
+  </p>
+  <p>
+    ¿Que música te gusta?
+    <input type="text" name="preferences[music]" value="{{preferences.music}}">
+  </p>
+  <p>
+    ¿Se puede fumar en tu auto?:
+    <select name="preferences[smoke]" id="auto">
+      <option value="Si">Si</option>
+      <option value="No">No</option>
+    </select>
+  </p>
+  <p>
+    Descripcion:
+    <br>
+    <textarea name="preferences[descripcion]" id="" cols="30" rows="10" placeholder="Hazle saber a tus acompañantes lo que te gusta hacer cuando vas camino a tu trabajo, por ejemplo, si te gusta platicar o si no te molesta que se duerman :)"></textarea>
+  </p>
+  <input type="submit" value="Actualiza tus datos!">
+  </div>
+</form>
+
+
+

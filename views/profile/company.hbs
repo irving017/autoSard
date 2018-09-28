@@ -1,0 +1,271 @@
+<style>
+  /*!
+ * Start Bootstrap - Landing Page v5.0.0 (https://startbootstrap.com/template-overviews/landing-page)
+ * Copyright 2013-2018 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-landing-page/blob/master/LICENSE)
+ */
+
+body {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+header.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url("../img/bg-masthead.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+header.masthead .overlay {
+  position: absolute;
+  background-color: #212529;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+}
+
+header.masthead h1 {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  header.masthead {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+
+.showcase .showcase-text {
+  padding: 3rem;
+}
+
+.showcase .showcase-img {
+  min-height: 30rem;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .showcase .showcase-text {
+    padding: 7rem;
+  }
+}
+
+.features-icons {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item {
+  max-width: 20rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon {
+  height: 7rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i {
+  font-size: 4.5rem;
+}
+
+.features-icons .features-icons-item:hover .features-icons-icon i {
+  font-size: 5rem;
+}
+
+.testimonials {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.testimonials .testimonial-item {
+  max-width: 18rem;
+}
+
+.testimonials .testimonial-item img {
+  max-width: 12rem;
+  -webkit-box-shadow: 0px 5px 5px 0px #adb5bd;
+  box-shadow: 0px 5px 5px 0px #adb5bd;
+}
+
+.call-to-action {
+  position: relative;
+  background-color: #343a40;
+  background: url("../img/bg-masthead.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.call-to-action .overlay {
+  position: absolute;
+  background-color: #212529;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+}
+
+footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+}
+
+
+.empresa{
+  font-size: 70px;
+  text-align: center;
+}
+
+.perfil{
+ 
+ text-decoration: none;
+
+}
+
+.direccion{
+  text-align: center;
+  font-size: 24px;
+}
+
+.mapa{
+  margin: 30px 0;
+  border-radius: 15px;
+  width: 70%;
+  height: 500px;
+}
+
+.rutas{
+  border-bottom:solid 1px gray; 
+  padding: 30px 0;
+   margin: 20px 0;
+
+}
+
+h3{
+  font-size: 50px;
+}
+
+.formulario-company{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 70%;
+  margin: 30px 15vw;
+}
+
+
+.formulario-company p{
+  font-size: 24px;
+  margin: 0 3px;
+
+}
+
+.formulario-company p:nth-child(1) {
+  font-weight: bolder;
+}
+</style>
+<body>
+  <section class="body" > 
+   
+    <div class="formulario-company" >
+      <p class="empresa" >{{user.companyName}} |</p>
+      <p class="direccion">
+         Punto de partida:
+      <input type="text" name="address" id="address">
+        </p>
+    </div>  
+    <center><div  class="mapa" id="map"></div></center>
+    <div class="rutas-disponibles" >
+     <center><h3>Viajes disponibles</h3></center> 
+    {{#each company.routes}}
+    <div class="container">
+    <div class="routeCard row rutas">
+      <div class="col-3">
+        <img style="width:80%;" src="http://vallartaopina.net/wp-content/uploads/2017/11/MAPS.jpg" alt="imagen">
+    </div>
+    <div class="col-9">
+      <p><strong>Salida:</strong> 
+      {{this.start.address}}</p>
+      <p><strong>Destino:</strong> {{this.destiny.address}}</p>
+      <p><strong>Horario:</strong> {{this.time}}</p>
+      <a href="/profile/route/detail/{{this._id}}"><button class="btn btn-primary">Ver detalles del viaje</button></a>
+    </div>
+    </div>
+    </div  >
+    {{/each}}
+    </div>
+    </section>
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIstIL_VA1Z_tPaYLKg2CvMG1sz6V0ywY&libraries=places"></script>
+<script>
+  let lati = 19.39776549999999
+  let lng = -99.1713954
+  const map = document.getElementById('map')
+  const input = document.getElementById('address')
+
+  function initMap(lati,lngi) {
+    mapa = new google.maps.Map(map, {
+    center:{lat:lati,lng:lngi},
+    zoom:14
+    })
+    
+    {{#each company.routes}}
+      createMarkers({{this.start.coordinates.[1]}},{{this.start.coordinates.[0]}})
+    {{/each}}
+    createMarker(lati,lng) 
+    }
+
+  function autoComplete(ainput){
+    const dropdown = new google.maps.places.Autocomplete(ainput)
+    dropdown.addListener('place_changed',()=>{
+      const place = dropdown.getPlace()
+      lati = place.geometry.location.lat()
+      lng = place.geometry.location.lng()   
+      initMap(lati,lng)
+    })
+  }
+  var image = {
+    url: "/img/carrito.png",
+    scaledSize:new google.maps.Size (50,50)
+  }
+    var image2 = {
+    url: "/img/persona.png",
+    scaledSize:new google.maps.Size (50,50)
+  }
+  function createMarker(x,y){
+    let markere = new google.maps.Marker({
+      position:{lat:x, lng:y},
+      map:mapa,
+      title:"{{user.username}}",
+      icon:image2
+    })
+  }
+  function createMarkers(x,y){
+    let markere = new google.maps.Marker({
+      position:{lat:x, lng:y},
+      map:mapa,
+      title:"{{user.username}}",
+      icon:image
+    })
+  }
+  initMap(lati,lng)
+  autoComplete(input)
+</script>

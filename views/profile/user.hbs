@@ -1,0 +1,106 @@
+
+<style>
+
+.fotoPerfil img{
+  margin: 50px 0;
+  border: solid 1px black;
+  width: 200px;
+  height: 200px;
+  border-radius: 150px;
+  
+}
+
+.papa{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+#section2{
+  width: 100%;
+  padding: 30px;
+  background-color: #CCD7E4;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart{
+  width: 70vw;
+  margin-left: 300px;
+
+}
+
+h4{
+
+font-size: 30px;
+
+
+}
+
+.chiquito{
+  margin: 30px 15vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 70vw;
+}
+
+.chiquito h4{
+  margin: 0 5vw; 
+}
+
+
+</style>
+
+
+
+<section id="section1">
+  <div class="papa" >
+    
+    <div class="fotoPerfil" ><img src="{{photoURL}}" alt="Imagen de perfil" id="img-perfil"></div>
+  
+   <h2>{{username}}</h2>
+
+   
+  </div>
+{{!-- <input max="5" type="number" name="number" id="grade">
+<button type="submit">Calificar</button> --}}
+</section>
+<div id="section2">
+  <div class="cart" >
+  <h4>Info General</h4>
+  <br>
+  <p>Nombre completo:{{completeName}}</p>
+  <p>Tu Edad: {{age}}</p>
+  <p>Gusto musical: {{preferences.music}}</p>
+  <p>¿Tienes Auto?: {{car}}</p>
+  <p>¿Pueden Fumar en tu auto?: {{preferences.smoke}}</p>
+  <p>Descripción: {{preferences.descripcion}}</p>
+  </div>
+  <a href="/profile/user/editar/{{_id}}"><button class="btn btn-primary">Editar Perfil</button></a>
+</div>
+<div id="section3">
+  <div class="chiquito" >
+    <center><h4>Tus viajes</h4></center>
+  <a href="/profile/route/new"><button class="btn btn-primary">Crear una ruta</button></a>
+  </div>
+  {{#each routes}}
+  <div class="container">
+    <div class="routeCard row">
+      <div class="col-3">
+          <img style="width:100%;" src="http://vallartaopina.net/wp-content/uploads/2017/11/MAPS.jpg" alt="imagen">
+      </div>
+      <div class="col-9">
+        <p><strong>Salida:</strong> 
+        {{this.start.address}}</p>
+        <p><strong>Destino:</strong> {{this.destiny.address}}</p>
+        <p><strong>Horario:</strong> {{this.time}}</p>
+        <a href="/profile/route/delete/{{this._id}}"><button class="btn btn-primary">Borrar</button></a>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>

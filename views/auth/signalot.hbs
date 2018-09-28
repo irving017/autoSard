@@ -1,0 +1,41 @@
+{{!--
+<form action="/signup/users" method="POST">	
+  <p>Mails</p>
+  <textarea name="info" id="info" cols="30" rows="10"></textarea>
+  <p>
+  <select name="companyName" id="company">
+    {{#each companies}}
+    <option value={{this.companyName}}>{{this.companyName}}</option>
+    {{/each}}
+  </select>
+  </p>
+  <p><input type='submit' value='SignUp'></p>
+</form>
+--}}
+<section class="body" >
+
+<div class="login-content" > 
+
+  <h2>SignUp</h2>
+
+<form action="/signup/users" method="POST">
+
+  <div class="form-group">
+    <textarea class="form-control" name="info" id="info" cols="30" rows="10"  placeholder="Mails"></textarea>
+  </div>
+  <label for='company'>Company</label>
+    <select name="companyName" id="company">
+      {{#each companies}}
+      <option value={{companyName}}>{{this.companyName}}</option>
+      {{/each}}
+    </select>
+  <button type="submit" value="SignUp" class="btn btn-primary">Confirm identity</button>
+
+</form>
+
+
+</div>
+
+
+</section>
+
